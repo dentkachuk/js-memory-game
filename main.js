@@ -12,9 +12,20 @@ function flipCard() {
         hasFlippedCard = true;
         firstCard = this;
     } else {
+        // second click
         hasFlippedCard = false;
         secondCard = this;
-        console.log({secondCard, firstCard});
+
+        // do cards match?
+        if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+        } else {
+            setTimeout(() => {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+            }, 1500);
+        }
     }
 }
 
